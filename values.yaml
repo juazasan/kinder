@@ -1,0 +1,21 @@
+nginxGateway:
+  name: nginx-gateway
+service:
+  type: NodePort
+  ports:
+  - name: http
+    port: 80
+    protocol: TCP
+    targetPort: 80
+    nodePort: 31437
+  - name: https
+    port: 443
+    protocol: TCP
+    targetPort: 443
+    nodePort: 31438
+nodeSelector:
+  ingress-ready: "true"
+tolerations:
+  - effect: "NoSchedule"
+    key: "node-role.kubernetes.io/control-plane"
+    operator: "Equal"
